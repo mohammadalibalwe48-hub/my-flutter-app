@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
+import 'device_emulator.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MobileEmulatorFrame(
+      appBuilder: (themeMode) => MyApp(themeMode: themeMode),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key, this.themeMode = ThemeMode.light});
+
+  final ThemeMode themeMode;
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      themeMode: themeMode,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -29,6 +38,12 @@ class MyApp extends StatelessWidget {
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+      ),
+      darkTheme: ThemeData(
+        colorScheme: .fromSeed(
+          seedColor: Colors.deepPurple,
+          brightness: Brightness.dark,
+        ),
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
